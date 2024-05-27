@@ -10,10 +10,8 @@ from models.review import Review
 @app_views.route("/places/<place_id>/reviews", methods=["GET"],
                  strict_slashes=False)
 def reviews_by_place(place_id):
-    """
-    retrieves all Review objects by place
-    :return: json of all reviews
-    """
+    """ get json resp """
+
     review_list = []
     place_obj = storage.get("Place", str(place_id))
 
