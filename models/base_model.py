@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-"""
-BaseModel Class of Models Module
-"""
+
+"""BaseModel Class of Models Module"""
 
 import os
 import json
@@ -37,7 +36,6 @@ class BaseModel:
                             default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
-        """instantiation of new BaseModel Class"""
         self.id = str(uuid4())
         self.created_at = datetime.now()
         if kwargs:
