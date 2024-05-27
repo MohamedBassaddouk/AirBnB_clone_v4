@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
-from flask import jsonify
-from api.v1.views import app_views
+""" This is the main index.py file """
 
+
+from flask import jsonify
+from __init__ import app_views
 from models import storage
 
 

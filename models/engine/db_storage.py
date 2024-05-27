@@ -75,23 +75,21 @@ class DBStorage:
 
     def count(self, cls=None):
         """
-        count of how many instances of a class
-        :param cls: class name
-        :return: count of instances of a class
+        this is counting function
         """
         return len(self.all(cls))
 
     def save(self):
-        """ commits all changes of current database session """
+        """ save the changes """
         self.__session.commit()
 
     def delete(self, obj=None):
-        """ deletes obj from current database session if not None """
+        """ object delete """
         if obj is not None:
             self.__session.delete(obj)
 
     def reload(self):
-        """ creates all tables in database & session from engine """
+        """ tables creation function """
         Base.metadata.create_all(self.__engine)
         self.__session = scoped_session(
             sessionmaker(
