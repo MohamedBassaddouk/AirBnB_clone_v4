@@ -7,11 +7,11 @@ from flask import Blueprint
 
 app_views = Blueprint('/api/v1', __name__, url_prefix="/api/v1")
 
-from index import *
-from states import *
-from amenities import *
-from cities import *
-from places import *
-from places_reviews import *
-from users import *
-from places_amenities import *
+from api.v1.views.index import *
+from api.v1.views.states import *
+from api.v1.views.amenities import *
+from api.v1.views.cities import *
+from api.v1.views.places import *
+from api.v1.views.places_reviews import *
+from api.v1.views.users import *
+from api.v1.views.places_amenities import *

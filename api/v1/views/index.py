@@ -4,7 +4,8 @@
 
 
 from flask import jsonify
-from __init__ import app_views
+from api.v1.views import app_views
+
 from models import storage
 
 

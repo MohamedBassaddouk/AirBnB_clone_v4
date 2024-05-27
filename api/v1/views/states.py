@@ -3,19 +3,17 @@
 route for handling State objects and operations
 """
 from flask import jsonify, abort, request
-from __init__ import app_views
-from models.engine.db_storage import DBStorage
+from api.v1.views import app_views, storage
 from models.state import State
 
 
 @app_views.route("/states", methods=["GET"], strict_slashes=False)
 def state_get_all():
     """
-    retrieves all State objects
-    :return: json of all states
+    gives js on reponse
     """
     state_list = []
-    state_obj = DBStorage.all("State")
+    state_obj = storage.all("State")
     for obj in state_obj.values():
         state_list.append(obj.to_json())
 
@@ -45,10 +43,12 @@ def state_create():
 @app_views.route("/states/<state_id>",  methods=["GET"], strict_slashes=False)
 def state_by_id(state_id):
     """
-   return satte by id
+    gets a specific State object by ID
+    :param state_id: state object id
+    :return: state obj with the specified id or error
     """
 
-    fetched_obj = DBStorage.get("State", str(state_id))
+    fetched_obj = storage.get("State", str(state_id))
 
     if fetched_obj is None:
         abort(404)
@@ -66,7 +66,7 @@ def state_put(state_id):
     state_json = request.get_json(silent=True)
     if state_json is None:
         abort(400, 'Not a JSON')
-    fetched_obj = DBStorage.get("State", str(state_id))
+    fetched_obj = storage.get("State", str(state_id))
     if fetched_obj is None:
         abort(404)
     for key, val in state_json.items():
@@ -85,12 +85,12 @@ def state_delete_by_id(state_id):
     :return: empty dict with 200 or 404 if not found
     """
 
-    fetched_obj = DBStorage.get("State", str(state_id))
+    fetched_obj = storage.get("State", str(state_id))
 
     if fetched_obj is None:
         abort(404)
 
-    DBStorage.delete(fetched_obj)
-    DBStorage.save()
+    storage.delete(fetched_obj)
+    storage.save()
 
     return jsonify({})

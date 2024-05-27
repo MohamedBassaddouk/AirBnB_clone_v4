@@ -75,12 +75,12 @@ class DBStorage:
 
     def count(self, cls=None):
         """
-        this is counting function
+        this is counting def
         """
         return len(self.all(cls))
 
     def save(self):
-        """ save the changes """
+        """ commits all changes of current database session """
         self.__session.commit()
 
     def delete(self, obj=None):
@@ -89,7 +89,7 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
-        """ tables creation function """
+        """ retutrn new updated data """
         Base.metadata.create_all(self.__engine)
         self.__session = scoped_session(
             sessionmaker(
@@ -97,7 +97,5 @@ class DBStorage:
                 expire_on_commit=False))
 
     def close(self):
-        """
-            calls remove() on private session attribute (self.session)
-        """
+        """ rem session function"""
         self.__session.remove()
